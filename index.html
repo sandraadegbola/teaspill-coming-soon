@@ -22,47 +22,36 @@
       --font-body: 'Plus Jakarta Sans', sans-serif;
     }
 
-    html, body { width: 100%; }
+    html, body { width: 100%; min-height: 100vh; }
 
     body {
       font-family: var(--font-body);
       background-color: var(--dark);
       color: var(--cream);
-      min-height: 100vh;
       position: relative;
       overflow-x: hidden;
     }
 
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background-image:
         repeating-linear-gradient(45deg, rgba(219,169,154,0.012) 0px, rgba(219,169,154,0.012) 1px, transparent 1px, transparent 9px),
         repeating-linear-gradient(-45deg, rgba(219,169,154,0.012) 0px, rgba(219,169,154,0.012) 1px, transparent 1px, transparent 9px);
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
 
     body::after {
       content: '';
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background:
         radial-gradient(ellipse at 15% 20%, rgba(44,24,16,0.5) 0%, transparent 55%),
         radial-gradient(ellipse at 85% 75%, rgba(222,208,196,0.06) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
 
-    /* Ripple waves */
+    /* Ripple */
     @keyframes ripple1 {
-      0%   { transform: translateX(-120%) skewX(-8deg); opacity: 0; }
-      15%  { opacity: 1; }
-      85%  { opacity: 1; }
-      100% { transform: translateX(220%) skewX(-8deg); opacity: 0; }
-    }
-    @keyframes ripple2 {
       0%   { transform: translateX(-120%) skewX(-8deg); opacity: 0; }
       15%  { opacity: 1; }
       85%  { opacity: 1; }
@@ -70,147 +59,121 @@
     }
 
     .ripple-layer {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1; overflow: hidden;
     }
 
     .ripple-layer span {
-      position: absolute;
-      top: 0; left: 0;
+      position: absolute; top: 0; left: 0;
       width: 40%; height: 100%;
       background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(222,208,196,0.03) 30%,
-        rgba(219,169,154,0.055) 50%,
-        rgba(222,208,196,0.03) 70%,
-        transparent 100%
+        transparent 0%, rgba(222,208,196,0.03) 30%,
+        rgba(219,169,154,0.055) 50%, rgba(222,208,196,0.03) 70%, transparent 100%
       );
     }
 
     .ripple-layer span:nth-child(1) { animation: ripple1 14s ease-in-out infinite; }
-    .ripple-layer span:nth-child(2) { animation: ripple2 14s ease-in-out infinite; animation-delay: 7s; }
+    .ripple-layer span:nth-child(2) { animation: ripple1 14s ease-in-out infinite; animation-delay: 7s; }
 
     .watermark {
-      position: fixed;
-      top: 50%; left: 50%;
+      position: fixed; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      font-family: var(--font-heading);
-      font-style: italic;
-      font-size: clamp(100px, 22vw, 240px);
-      font-weight: 500;
-      color: var(--champagne);
-      opacity: 0.032;
-      white-space: nowrap;
-      pointer-events: none;
-      z-index: 0;
-      letter-spacing: -2px;
-      user-select: none;
+      font-family: var(--font-heading); font-style: italic;
+      font-size: clamp(100px, 22vw, 240px); font-weight: 500;
+      color: var(--champagne); opacity: 0.032;
+      white-space: nowrap; pointer-events: none; z-index: 0;
+      letter-spacing: -2px; user-select: none;
     }
 
     .glow {
-      position: fixed;
-      top: 50%; left: 50%;
+      position: fixed; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 60vmin; height: 60vmin;
-      border-radius: 50%;
+      width: 55vmin; height: 55vmin; border-radius: 50%;
       background: radial-gradient(circle, rgba(222,208,196,0.12) 0%, rgba(219,169,154,0.05) 45%, transparent 70%);
-      pointer-events: none;
-      z-index: 2;
+      pointer-events: none; z-index: 2;
     }
 
-    /* Page: natural top-to-bottom flow, no justify-content */
+    /* Fixed footer */
+    .contact-line {
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 10; font-size: 11px;
+      color: rgba(222,208,196,0.4);
+      letter-spacing: 0.8px; white-space: nowrap;
+    }
+
+    .contact-line a { color: inherit; text-decoration: none; }
+    .contact-line a:hover { color: rgba(222,208,196,0.65); }
+
+    /* Page layout — natural flow, padded away from fixed footer */
     .page {
-      position: relative;
-      z-index: 3;
-      width: 100%;
-      max-width: 520px;
+      position: relative; z-index: 3;
+      width: 100%; max-width: 560px;
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 64px 32px 48px;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      padding: 60px 32px 80px; /* bottom clears fixed footer */
     }
 
     .eyebrow {
-      font-size: 9px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--rose);
-      font-weight: 500;
-      margin-bottom: 12px;
+      font-size: 9px; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--rose);
+      font-weight: 500; margin-bottom: 12px;
     }
 
     .logo {
-      font-family: var(--font-heading);
-      font-style: italic;
-      font-weight: 500;
-      font-size: clamp(38px, 8vw, 52px);
-      line-height: 1;
-      margin-bottom: 12px;
-      letter-spacing: -0.5px;
+      font-family: var(--font-heading); font-style: italic;
+      font-weight: 500; font-size: clamp(38px, 7vw, 52px);
+      line-height: 1; margin-bottom: 12px; letter-spacing: -0.5px;
     }
 
     .logo .tea { color: #DED0C4; }
     .logo .spill { color: var(--rose); }
 
     .tagline {
-      font-size: 10px;
-      color: var(--champagne);
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      font-weight: 300;
-      opacity: 0.35;
+      font-size: 10px; color: var(--champagne);
+      letter-spacing: 2.5px; text-transform: uppercase;
+      font-weight: 300; opacity: 0.35;
     }
 
+    /*
+      Cup: 55vmin wide (slightly smaller than before).
+      Top margin -8vmin: pulls cup closer to tagline above (reduces top gap).
+      Bottom margin -8vmin: leaves breathing room below swoosh.
+      Both sides equal so steam-to-tagline ≈ swoosh-to-text.
+    */
     .cup-wrap img {
-      width: 60vmin;
-      height: 60vmin;
+      width: 55vmin;
+      height: 55vmin;
       object-fit: contain;
       display: block;
-      margin: -5vmin auto -15vmin;
+      margin: -8vmin auto -8vmin;
     }
 
     .body-text {
-      font-size: 13px;
-      color: var(--champagne);
-      line-height: 1.8;
-      max-width: 260px;
-      opacity: 0.8;
-      font-weight: 300;
-      margin-bottom: 6px;
+      font-size: 13px; color: var(--champagne);
+      line-height: 1.8; max-width: 260px;
+      opacity: 0.8; font-weight: 300; margin-bottom: 6px;
     }
 
     .body-text-italic {
-      font-family: var(--font-heading);
-      font-style: italic;
-      font-size: 15px;
-      color: #FDF8F5;
-      opacity: 0.9;
-      margin-bottom: 22px;
+      font-family: var(--font-heading); font-style: italic;
+      font-size: 15px; color: #FDF8F5;
+      opacity: 0.9; margin-bottom: 24px;
     }
 
     .form {
-      width: 100%;
-      max-width: 320px;
-      display: flex;
-      gap: 8px;
-      margin-bottom: 60px;
+      width: 100%; max-width: 320px;
+      display: flex; gap: 8px;
     }
 
     .form input {
       flex: 1;
       background: rgba(253,248,245,0.07);
       border: 1px solid rgba(253,248,245,0.16);
-      border-radius: 4px;
-      padding: 12px 14px;
-      font-size: 13px;
-      color: var(--cream);
-      font-family: var(--font-body);
-      outline: none;
+      border-radius: 4px; padding: 12px 14px;
+      font-size: 13px; color: var(--cream);
+      font-family: var(--font-body); outline: none;
       transition: border-color 0.2s;
     }
 
@@ -218,60 +181,45 @@
     .form input:focus { border-color: rgba(219,169,154,0.5); }
 
     .form button {
-      background: var(--rose);
-      border: none;
-      border-radius: 4px;
-      padding: 12px 18px;
-      font-size: 11.5px;
-      font-weight: 600;
-      color: var(--primary);
-      font-family: var(--font-body);
-      cursor: pointer;
-      white-space: nowrap;
-      letter-spacing: 0.5px;
-      transition: background 0.2s;
+      background: var(--rose); border: none;
+      border-radius: 4px; padding: 12px 18px;
+      font-size: 11.5px; font-weight: 600;
+      color: var(--primary); font-family: var(--font-body);
+      cursor: pointer; white-space: nowrap;
+      letter-spacing: 0.5px; transition: background 0.2s;
     }
 
     .form button:hover { background: #c99585; }
 
     .success-msg {
-      display: none;
-      font-size: 12px;
-      color: var(--rose);
-      letter-spacing: 0.5px;
-      margin-bottom: 60px;
-      margin-top: -44px;
+      display: none; font-size: 12px;
+      color: var(--rose); letter-spacing: 0.5px; margin-top: 14px;
     }
 
-    /* Contact in normal flow at bottom */
-    .contact-line {
-      font-size: 11px;
-      color: rgba(222,208,196,0.4);
-      letter-spacing: 0.8px;
-      padding-bottom: 32px;
+    @media (max-width: 500px) {
+      .page { padding: 48px 24px 72px; }
+      .contact-line { font-size: 10px; bottom: 16px; }
+      .cup-wrap img { width: 70vmin; height: 70vmin; margin: -10vmin auto -10vmin; }
     }
-
-    .contact-line a { color: inherit; text-decoration: none; }
-    .contact-line a:hover { color: rgba(222,208,196,0.65); }
 
     @media (min-width: 640px) {
-      .page { max-width: 580px; padding: 72px 48px 48px; }
-      .logo { font-size: clamp(42px, 7vw, 54px); }
+      .page { max-width: 600px; padding: 64px 48px 80px; }
+      .logo { font-size: clamp(42px, 6vw, 54px); }
       .form { max-width: 380px; }
       .body-text { max-width: 290px; font-size: 13.5px; }
       .body-text-italic { font-size: 16px; }
-      .contact-line { font-size: 12px; }
+      .contact-line { font-size: 12px; bottom: 28px; }
     }
 
     @media (min-width: 1024px) {
-      .page { max-width: 640px; padding: 80px 60px 48px; }
-      .logo { font-size: clamp(44px, 5vw, 56px); }
+      .page { max-width: 660px; padding: 72px 60px 80px; }
+      .logo { font-size: clamp(44px, 4.5vw, 56px); }
       .form { max-width: 420px; }
       .form input { padding: 13px 16px; font-size: 13.5px; }
       .form button { padding: 13px 20px; font-size: 12px; }
       .body-text { max-width: 300px; font-size: 14px; }
-      .body-text-italic { font-size: 17px; }
-      .contact-line { font-size: 12px; }
+      .body-text-italic { font-size: 17px; margin-bottom: 28px; }
+      .contact-line { font-size: 12px; bottom: 28px; }
     }
   </style>
 </head>
@@ -280,6 +228,14 @@
   <div class="watermark">Teaspill</div>
   <div class="ripple-layer"><span></span><span></span></div>
   <div class="glow"></div>
+
+  <p class="contact-line">
+    <a href="https://instagram.com/teaspill_uk" target="_blank">@teaspill_uk</a>
+    &nbsp;·&nbsp;
+    <a href="mailto:hello@teaspill.co.uk">hello@teaspill.co.uk</a>
+    &nbsp;·&nbsp;
+    © 2026
+  </p>
 
   <div class="page">
     <p class="eyebrow">Coming soon</p>
@@ -300,14 +256,6 @@
       <button type="submit">Notify me</button>
     </form>
     <p class="success-msg" id="successMsg">You're on the list — we'll be in touch ✦</p>
-
-    <p class="contact-line">
-      <a href="https://instagram.com/teaspill_uk" target="_blank">@teaspill_uk</a>
-      &nbsp;·&nbsp;
-      <a href="mailto:hello@teaspill.co.uk">hello@teaspill.co.uk</a>
-      &nbsp;·&nbsp;
-      © 2026
-    </p>
   </div>
 
   <script>
