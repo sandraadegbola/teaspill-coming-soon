@@ -22,7 +22,7 @@
       --font-body: 'Plus Jakarta Sans', sans-serif;
     }
 
-    html, body { height: 100%; width: 100%; }
+    html, body { width: 100%; }
 
     body {
       font-family: var(--font-body);
@@ -55,7 +55,7 @@
       z-index: 0;
     }
 
-    /* Horizontal ripple waves */
+    /* Ripple waves */
     @keyframes ripple1 {
       0%   { transform: translateX(-120%) skewX(-8deg); opacity: 0; }
       15%  { opacity: 1; }
@@ -79,10 +79,8 @@
 
     .ripple-layer span {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 40%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 40%; height: 100%;
       background: linear-gradient(90deg,
         transparent 0%,
         rgba(222,208,196,0.03) 30%,
@@ -92,19 +90,12 @@
       );
     }
 
-    .ripple-layer span:nth-child(1) {
-      animation: ripple1 14s ease-in-out infinite;
-      animation-delay: 0s;
-    }
-    .ripple-layer span:nth-child(2) {
-      animation: ripple2 14s ease-in-out infinite;
-      animation-delay: 7s;
-    }
+    .ripple-layer span:nth-child(1) { animation: ripple1 14s ease-in-out infinite; }
+    .ripple-layer span:nth-child(2) { animation: ripple2 14s ease-in-out infinite; animation-delay: 7s; }
 
     .watermark {
       position: fixed;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       font-family: var(--font-heading);
       font-style: italic;
@@ -121,45 +112,27 @@
 
     .glow {
       position: fixed;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 60vmin;
-      height: 60vmin;
+      width: 60vmin; height: 60vmin;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(222,208,196,0.12) 0%, rgba(219,169,154,0.05) 45%, transparent 70%);
       pointer-events: none;
       z-index: 2;
     }
 
-    .contact-line {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      font-size: 11px;
-      color: rgba(222,208,196,0.4);
-      letter-spacing: 0.8px;
-      white-space: nowrap;
-    }
-
-    .contact-line a { color: inherit; text-decoration: none; }
-    .contact-line a:hover { color: rgba(222,208,196,0.65); }
-
+    /* Page: natural top-to-bottom flow, no justify-content */
     .page {
       position: relative;
       z-index: 3;
       width: 100%;
       max-width: 520px;
       margin: 0 auto;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       text-align: center;
-      padding: 52px 32px 80px;
+      padding: 64px 32px 48px;
     }
 
     .eyebrow {
@@ -168,7 +141,7 @@
       text-transform: uppercase;
       color: var(--rose);
       font-weight: 500;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .logo {
@@ -177,7 +150,7 @@
       font-weight: 500;
       font-size: clamp(38px, 8vw, 52px);
       line-height: 1;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       letter-spacing: -0.5px;
     }
 
@@ -191,7 +164,6 @@
       text-transform: uppercase;
       font-weight: 300;
       opacity: 0.35;
-      margin-bottom: 0;
     }
 
     .cup-wrap img {
@@ -218,7 +190,7 @@
       font-size: 15px;
       color: #FDF8F5;
       opacity: 0.9;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .form {
@@ -226,6 +198,7 @@
       max-width: 320px;
       display: flex;
       gap: 8px;
+      margin-bottom: 60px;
     }
 
     .form input {
@@ -266,32 +239,39 @@
       font-size: 12px;
       color: var(--rose);
       letter-spacing: 0.5px;
-      margin-top: 14px;
+      margin-bottom: 60px;
+      margin-top: -44px;
     }
 
-    @media (max-width: 500px) {
-      .page { padding: 44px 24px 72px; }
-      .contact-line { font-size: 10px; bottom: 16px; }
+    /* Contact in normal flow at bottom */
+    .contact-line {
+      font-size: 11px;
+      color: rgba(222,208,196,0.4);
+      letter-spacing: 0.8px;
+      padding-bottom: 32px;
     }
+
+    .contact-line a { color: inherit; text-decoration: none; }
+    .contact-line a:hover { color: rgba(222,208,196,0.65); }
 
     @media (min-width: 640px) {
-      .page { max-width: 580px; padding: 52px 48px 80px; }
+      .page { max-width: 580px; padding: 72px 48px 48px; }
       .logo { font-size: clamp(42px, 7vw, 54px); }
       .form { max-width: 380px; }
       .body-text { max-width: 290px; font-size: 13.5px; }
       .body-text-italic { font-size: 16px; }
-      .contact-line { font-size: 12px; bottom: 28px; }
+      .contact-line { font-size: 12px; }
     }
 
     @media (min-width: 1024px) {
-      .page { max-width: 640px; padding: 52px 60px 80px; }
+      .page { max-width: 640px; padding: 80px 60px 48px; }
       .logo { font-size: clamp(44px, 5vw, 56px); }
       .form { max-width: 420px; }
       .form input { padding: 13px 16px; font-size: 13.5px; }
       .form button { padding: 13px 20px; font-size: 12px; }
       .body-text { max-width: 300px; font-size: 14px; }
-      .body-text-italic { font-size: 17px; margin-bottom: 22px; }
-      .contact-line { font-size: 12px; bottom: 28px; }
+      .body-text-italic { font-size: 17px; }
+      .contact-line { font-size: 12px; }
     }
   </style>
 </head>
@@ -300,14 +280,6 @@
   <div class="watermark">Teaspill</div>
   <div class="ripple-layer"><span></span><span></span></div>
   <div class="glow"></div>
-
-  <p class="contact-line">
-    <a href="https://instagram.com/teaspill_uk" target="_blank">@teaspill_uk</a>
-    &nbsp;·&nbsp;
-    <a href="mailto:hello@teaspill.co.uk">hello@teaspill.co.uk</a>
-    &nbsp;·&nbsp;
-    © 2026
-  </p>
 
   <div class="page">
     <p class="eyebrow">Coming soon</p>
@@ -328,6 +300,14 @@
       <button type="submit">Notify me</button>
     </form>
     <p class="success-msg" id="successMsg">You're on the list — we'll be in touch ✦</p>
+
+    <p class="contact-line">
+      <a href="https://instagram.com/teaspill_uk" target="_blank">@teaspill_uk</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:hello@teaspill.co.uk">hello@teaspill.co.uk</a>
+      &nbsp;·&nbsp;
+      © 2026
+    </p>
   </div>
 
   <script>
