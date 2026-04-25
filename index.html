@@ -32,6 +32,7 @@
       position: relative;
     }
 
+    /* Subtle grid texture */
     body::before {
       content: '';
       position: fixed;
@@ -43,6 +44,7 @@
       z-index: 0;
     }
 
+    /* Warm colour wash */
     body::after {
       content: '';
       position: fixed;
@@ -54,6 +56,62 @@
       z-index: 0;
     }
 
+    /* ── Horizontal ripple waves ── */
+    @keyframes ripple1 {
+      0%   { transform: translateX(-120%) skewX(-8deg); opacity: 0; }
+      15%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { transform: translateX(220%) skewX(-8deg); opacity: 0; }
+    }
+    @keyframes ripple2 {
+      0%   { transform: translateX(-120%) skewX(-8deg); opacity: 0; }
+      15%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { transform: translateX(220%) skewX(-8deg); opacity: 0; }
+    }
+    @keyframes ripple3 {
+      0%   { transform: translateX(-120%) skewX(-8deg); opacity: 0; }
+      15%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { transform: translateX(220%) skewX(-8deg); opacity: 0; }
+    }
+
+    .ripple-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .ripple-layer span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(222,208,196,0.03) 30%,
+        rgba(219,169,154,0.055) 50%,
+        rgba(222,208,196,0.03) 70%,
+        transparent 100%
+      );
+    }
+
+    .ripple-layer span:nth-child(1) {
+      animation: ripple1 14s ease-in-out infinite;
+      animation-delay: 0s;
+    }
+    .ripple-layer span:nth-child(2) {
+      animation: ripple2 14s ease-in-out infinite;
+      animation-delay: 7s;
+    }
+    .ripple-layer span:nth-child(3) {
+      display: none;
+    }
+
+    /* Faded watermark */
     .watermark {
       position: fixed;
       top: 50%;
@@ -72,6 +130,7 @@
       user-select: none;
     }
 
+    /* Champagne glow */
     .glow {
       position: fixed;
       top: 50%;
@@ -82,9 +141,10 @@
       border-radius: 50%;
       background: radial-gradient(circle, rgba(222,208,196,0.12) 0%, rgba(219,169,154,0.05) 45%, transparent 70%);
       pointer-events: none;
-      z-index: 1;
+      z-index: 2;
     }
 
+    /* Contact pinned to bottom */
     .contact-line {
       position: fixed;
       bottom: 24px;
@@ -100,9 +160,10 @@
     .contact-line a { color: inherit; text-decoration: none; }
     .contact-line a:hover { color: rgba(222,208,196,0.65); }
 
+    /* Main centred column */
     .page {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       width: 100%;
       max-width: 520px;
       margin: 0 auto;
@@ -147,25 +208,13 @@
       margin-bottom: 0;
     }
 
-    /*
-      Clip the PNG whitespace using overflow:hidden on the wrapper.
-      - wrapper height (46vmin) clips ~14vmin off the bottom (the swoosh whitespace)
-      - negative top margin on wrapper (-6vmin) clips the top whitespace above steam
-      This is precise and won't cause text overlap.
-    */
-    .cup-wrap {
-      width: 60vmin;
-      height: 46vmin;
-      overflow: hidden;
-      margin: -6vmin auto 0;
-      flex-shrink: 0;
-    }
-
+    /* Cup — same margins as the version Sandra approved */
     .cup-wrap img {
       width: 60vmin;
       height: 60vmin;
       object-fit: contain;
       display: block;
+      margin: -5vmin auto -15vmin;
     }
 
     .body-text {
@@ -264,6 +313,13 @@
 <body>
 
   <div class="watermark">Teaspill</div>
+
+  <div class="ripple-layer">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
   <div class="glow"></div>
 
   <p class="contact-line">
