@@ -25,21 +25,17 @@
     html, body {
       height: 100%;
       width: 100%;
-      overflow: hidden;
     }
 
     body {
       font-family: var(--font-body);
       background-color: var(--dark);
       color: var(--cream);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       position: relative;
+      overflow-x: hidden;
     }
 
-    /* Subtle grid texture */
     body::before {
       content: '';
       position: fixed;
@@ -51,7 +47,6 @@
       z-index: 0;
     }
 
-    /* Warm colour wash */
     body::after {
       content: '';
       position: fixed;
@@ -63,7 +58,6 @@
       z-index: 0;
     }
 
-    /* Oversized faded watermark */
     .watermark {
       position: fixed;
       top: 50%;
@@ -71,7 +65,7 @@
       transform: translate(-50%, -50%);
       font-family: var(--font-heading);
       font-style: italic;
-      font-size: clamp(80px, 20vw, 200px);
+      font-size: clamp(100px, 22vw, 240px);
       font-weight: 500;
       color: var(--champagne);
       opacity: 0.032;
@@ -82,33 +76,33 @@
       user-select: none;
     }
 
-    /* Champagne glow */
     .glow {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 50vmin;
-      height: 50vmin;
+      width: 55vmin;
+      height: 55vmin;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(222,208,196,0.13) 0%, rgba(219,169,154,0.05) 45%, transparent 70%);
+      background: radial-gradient(circle, rgba(222,208,196,0.12) 0%, rgba(219,169,154,0.05) 45%, transparent 70%);
       pointer-events: none;
       z-index: 1;
     }
 
-    /* Page wrapper */
+    /* Single centred column — no flex growing, everything stacks naturally in the middle */
     .page {
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 500px;
-      padding: 40px 32px;
+      max-width: 520px;
+      margin: 0 auto;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
-      height: 100vh;
       justify-content: center;
+      text-align: center;
+      padding: 52px 32px;
       gap: 0;
     }
 
@@ -118,16 +112,16 @@
       text-transform: uppercase;
       color: var(--rose);
       font-weight: 500;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .logo {
       font-family: var(--font-heading);
       font-style: italic;
       font-weight: 500;
-      font-size: clamp(36px, 8vw, 48px);
+      font-size: clamp(38px, 8vw, 52px);
       line-height: 1;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       letter-spacing: -0.5px;
     }
 
@@ -135,51 +129,51 @@
     .logo .spill { color: var(--rose); }
 
     .tagline {
-      font-size: 9.5px;
+      font-size: 10px;
       color: var(--champagne);
       letter-spacing: 2.5px;
       text-transform: uppercase;
       font-weight: 300;
       opacity: 0.35;
-      margin-bottom: 0;
+      margin-bottom: 24px;
     }
 
-    /* Cup - negative margins eat into the PNG's built-in whitespace */
     .cup-wrap {
-      margin: -16px auto;
+      margin: 0 auto;
     }
 
     .cup-wrap img {
-      width: clamp(220px, 42vmin, 300px);
-      height: clamp(220px, 42vmin, 300px);
+      width: clamp(200px, 38vmin, 300px);
+      height: clamp(200px, 38vmin, 300px);
       object-fit: contain;
       display: block;
+      margin: -28px auto;
     }
 
     .divider-line {
       width: 1px;
       height: 28px;
       background: linear-gradient(to bottom, transparent, rgba(219,169,154,0.45), transparent);
-      margin: 4px auto 12px;
+      margin: 0 auto 18px;
     }
 
     .body-text {
-      font-size: 12.5px;
+      font-size: 13px;
       color: var(--champagne);
-      line-height: 1.75;
-      max-width: 240px;
+      line-height: 1.8;
+      max-width: 260px;
       opacity: 0.8;
       font-weight: 300;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .body-text-italic {
       font-family: var(--font-heading);
       font-style: italic;
-      font-size: 15px;
+      font-size: 16px;
       color: #FDF8F5;
       opacity: 0.9;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .form {
@@ -187,7 +181,7 @@
       max-width: 320px;
       display: flex;
       gap: 8px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .form input {
@@ -195,8 +189,8 @@
       background: rgba(253,248,245,0.07);
       border: 1px solid rgba(253,248,245,0.16);
       border-radius: 4px;
-      padding: 11px 13px;
-      font-size: 12.5px;
+      padding: 13px 14px;
+      font-size: 13px;
       color: var(--cream);
       font-family: var(--font-body);
       outline: none;
@@ -210,8 +204,8 @@
       background: var(--rose);
       border: none;
       border-radius: 4px;
-      padding: 11px 16px;
-      font-size: 11px;
+      padding: 13px 18px;
+      font-size: 11.5px;
       font-weight: 600;
       color: var(--primary);
       font-family: var(--font-body);
@@ -225,14 +219,14 @@
 
     .success-msg {
       display: none;
-      font-size: 12px;
+      font-size: 12.5px;
       color: var(--rose);
       letter-spacing: 0.5px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .contact-line {
-      font-size: 10.5px;
+      font-size: 11px;
       color: rgba(222,208,196,0.4);
       letter-spacing: 0.8px;
     }
@@ -240,38 +234,32 @@
     .contact-line a {
       color: inherit;
       text-decoration: none;
-      transition: color 0.2s;
     }
 
     .contact-line a:hover { color: rgba(222,208,196,0.65); }
 
     /* Tablet */
     @media (min-width: 640px) {
-      .page { max-width: 560px; padding: 40px 48px; }
-      .logo { font-size: clamp(40px, 7vw, 52px); margin-bottom: 10px; }
-      .eyebrow { margin-bottom: 12px; }
-      .cup-wrap img { width: clamp(240px, 38vmin, 320px); height: clamp(240px, 38vmin, 320px); }
-      .cup-wrap { margin: -18px auto; }
+      .page { max-width: 580px; padding: 56px 48px; }
+      .logo { font-size: clamp(42px, 7vw, 54px); }
+      .cup-wrap img { width: clamp(220px, 36vmin, 320px); height: clamp(220px, 36vmin, 320px); margin: -30px auto; }
       .form { max-width: 380px; }
-      .body-text { max-width: 280px; font-size: 13px; }
-      .body-text-italic { font-size: 16px; }
+      .body-text { max-width: 290px; font-size: 13.5px; }
+      .body-text-italic { font-size: 17px; }
     }
 
     /* Desktop */
     @media (min-width: 1024px) {
-      .page { max-width: 620px; padding: 40px 60px; }
-      .watermark { font-size: clamp(140px, 16vw, 220px); }
-      .logo { font-size: clamp(44px, 5vw, 54px); margin-bottom: 10px; }
-      .tagline { font-size: 10px; letter-spacing: 3px; }
-      .cup-wrap img { width: clamp(260px, 30vmin, 340px); height: clamp(260px, 30vmin, 340px); }
-      .cup-wrap { margin: -20px auto; }
-      .divider-line { height: 32px; margin-bottom: 14px; }
+      .page { max-width: 640px; padding: 60px 60px; }
+      .logo { font-size: clamp(44px, 5vw, 56px); }
+      .tagline { margin-bottom: 28px; }
+      .cup-wrap img { width: clamp(240px, 32vmin, 340px); height: clamp(240px, 32vmin, 340px); margin: -32px auto; }
       .form { max-width: 420px; }
-      .form input { padding: 13px 15px; font-size: 13px; }
-      .form button { padding: 13px 20px; font-size: 12px; }
-      .body-text { max-width: 300px; font-size: 13.5px; }
-      .body-text-italic { font-size: 17px; margin-bottom: 22px; }
-      .contact-line { font-size: 11px; }
+      .form input { padding: 14px 16px; font-size: 13.5px; }
+      .form button { padding: 14px 20px; font-size: 12px; }
+      .body-text { max-width: 300px; font-size: 14px; }
+      .body-text-italic { font-size: 18px; margin-bottom: 26px; }
+      .contact-line { font-size: 11.5px; }
     }
   </style>
 </head>
@@ -281,40 +269,33 @@
   <div class="glow"></div>
 
   <div class="page">
-    <div class="content" style="display:flex;flex-direction:column;align-items:center;width:100%;">
 
-      <p class="eyebrow">Coming soon</p>
-
-      <div class="logo">
-        <span class="tea">Tea</span><span class="spill">spill</span>
-      </div>
-
-      <p class="tagline">Black beauty, honestly reviewed</p>
-
-      <div class="cup-wrap">
-        <img src="cup.png" alt="Teaspill tea cup" />
-      </div>
-
-      <div class="divider-line"></div>
-
-      <p class="body-text">The UK's first dedicated reviews platform for Black hair &amp; beauty.</p>
-
-      <p class="body-text-italic">No more bad chair days.</p>
-
-      <form class="form" id="emailForm" onsubmit="handleSubmit(event)">
-        <input type="email" id="emailInput" placeholder="Your email address" required />
-        <button type="submit">Notify me</button>
-      </form>
-
-      <p class="success-msg" id="successMsg">You're on the list — we'll be in touch ✦</p>
-
-      <p class="contact-line">
-        <a href="https://instagram.com/teaspill_uk" target="_blank">@teaspill_uk</a>
-        &nbsp;·&nbsp;
-        <a href="mailto:hello@teaspill.co.uk">hello@teaspill.co.uk</a>
-      </p>
-
+    <p class="eyebrow">Coming soon</p>
+    <div class="logo">
+      <span class="tea">Tea</span><span class="spill">spill</span>
     </div>
+    <p class="tagline">Black beauty, honestly reviewed</p>
+
+    <div class="cup-wrap">
+      <img src="cup.png" alt="Teaspill tea cup" />
+    </div>
+
+    <div class="divider-line"></div>
+    <p class="body-text">The UK's first dedicated reviews platform for Black hair &amp; beauty.</p>
+    <p class="body-text-italic">No more bad chair days.</p>
+
+    <form class="form" id="emailForm" onsubmit="handleSubmit(event)">
+      <input type="email" id="emailInput" placeholder="Your email address" required />
+      <button type="submit">Notify me</button>
+    </form>
+    <p class="success-msg" id="successMsg">You're on the list — we'll be in touch ✦</p>
+
+    <p class="contact-line">
+      <a href="https://instagram.com/teaspill_uk" target="_blank">@teaspill_uk</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:hello@teaspill.co.uk">hello@teaspill.co.uk</a>
+    </p>
+
   </div>
 
   <script>
