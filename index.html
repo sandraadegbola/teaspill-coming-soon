@@ -81,15 +81,35 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 55vmin;
-      height: 55vmin;
+      width: 60vmin;
+      height: 60vmin;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(222,208,196,0.12) 0%, rgba(219,169,154,0.05) 45%, transparent 70%);
       pointer-events: none;
       z-index: 1;
     }
 
-    /* Single centred column — no flex growing, everything stacks naturally in the middle */
+    /* Contact pinned to bottom */
+    .contact-line {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      font-size: 11px;
+      color: rgba(222,208,196,0.4);
+      letter-spacing: 0.8px;
+      white-space: nowrap;
+    }
+
+    .contact-line a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .contact-line a:hover { color: rgba(222,208,196,0.65); }
+
+    /* Main centred column */
     .page {
       position: relative;
       z-index: 2;
@@ -102,8 +122,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 52px 32px;
-      gap: 0;
+      padding: 52px 32px 80px;
     }
 
     .eyebrow {
@@ -119,7 +138,7 @@
       font-family: var(--font-heading);
       font-style: italic;
       font-weight: 500;
-      font-size: clamp(38px, 8vw, 52px);
+      font-size: clamp(40px, 8vw, 54px);
       line-height: 1;
       margin-bottom: 12px;
       letter-spacing: -0.5px;
@@ -135,19 +154,16 @@
       text-transform: uppercase;
       font-weight: 300;
       opacity: 0.35;
-      margin-bottom: 24px;
+      margin-bottom: 0;
     }
 
-    .cup-wrap {
-      margin: 0 auto;
-    }
-
+    /* Cup fills the glow circle — glow is 60vmin so cup matches */
     .cup-wrap img {
-      width: clamp(200px, 38vmin, 300px);
-      height: clamp(200px, 38vmin, 300px);
+      width: 60vmin;
+      height: 60vmin;
       object-fit: contain;
       display: block;
-      margin: -28px auto;
+      margin: -10vmin auto;
     }
 
     .divider-line {
@@ -181,7 +197,6 @@
       max-width: 320px;
       display: flex;
       gap: 8px;
-      margin-bottom: 18px;
     }
 
     .form input {
@@ -222,44 +237,34 @@
       font-size: 12.5px;
       color: var(--rose);
       letter-spacing: 0.5px;
-      margin-bottom: 18px;
+      margin-top: 16px;
     }
 
-    .contact-line {
-      font-size: 11px;
-      color: rgba(222,208,196,0.4);
-      letter-spacing: 0.8px;
+    /* Mobile */
+    @media (max-width: 500px) {
+      .page { padding: 44px 28px 72px; }
     }
-
-    .contact-line a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .contact-line a:hover { color: rgba(222,208,196,0.65); }
 
     /* Tablet */
     @media (min-width: 640px) {
-      .page { max-width: 580px; padding: 56px 48px; }
-      .logo { font-size: clamp(42px, 7vw, 54px); }
-      .cup-wrap img { width: clamp(220px, 36vmin, 320px); height: clamp(220px, 36vmin, 320px); margin: -30px auto; }
+      .page { max-width: 580px; padding: 52px 48px 80px; }
+      .logo { font-size: clamp(44px, 7vw, 56px); }
       .form { max-width: 380px; }
       .body-text { max-width: 290px; font-size: 13.5px; }
       .body-text-italic { font-size: 17px; }
+      .contact-line { font-size: 12px; bottom: 32px; }
     }
 
     /* Desktop */
     @media (min-width: 1024px) {
-      .page { max-width: 640px; padding: 60px 60px; }
-      .logo { font-size: clamp(44px, 5vw, 56px); }
-      .tagline { margin-bottom: 28px; }
-      .cup-wrap img { width: clamp(240px, 32vmin, 340px); height: clamp(240px, 32vmin, 340px); margin: -32px auto; }
+      .page { max-width: 640px; padding: 52px 60px 80px; }
+      .logo { font-size: clamp(46px, 5vw, 58px); }
       .form { max-width: 420px; }
       .form input { padding: 14px 16px; font-size: 13.5px; }
       .form button { padding: 14px 20px; font-size: 12px; }
       .body-text { max-width: 300px; font-size: 14px; }
       .body-text-italic { font-size: 18px; margin-bottom: 26px; }
-      .contact-line { font-size: 11.5px; }
+      .contact-line { font-size: 12px; bottom: 32px; }
     }
   </style>
 </head>
@@ -268,8 +273,13 @@
   <div class="watermark">Teaspill</div>
   <div class="glow"></div>
 
-  <div class="page">
+  <p class="contact-line">
+    <a href="https://instagram.com/teaspill_uk" target="_blank">@teaspill_uk</a>
+    &nbsp;·&nbsp;
+    <a href="mailto:hello@teaspill.co.uk">hello@teaspill.co.uk</a>
+  </p>
 
+  <div class="page">
     <p class="eyebrow">Coming soon</p>
     <div class="logo">
       <span class="tea">Tea</span><span class="spill">spill</span>
@@ -289,13 +299,6 @@
       <button type="submit">Notify me</button>
     </form>
     <p class="success-msg" id="successMsg">You're on the list — we'll be in touch ✦</p>
-
-    <p class="contact-line">
-      <a href="https://instagram.com/teaspill_uk" target="_blank">@teaspill_uk</a>
-      &nbsp;·&nbsp;
-      <a href="mailto:hello@teaspill.co.uk">hello@teaspill.co.uk</a>
-    </p>
-
   </div>
 
   <script>
