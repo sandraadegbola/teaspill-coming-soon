@@ -22,11 +22,7 @@
       --font-body: 'Plus Jakarta Sans', sans-serif;
     }
 
-    html, body {
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-    }
+    html, body { height: 100%; width: 100%; overflow: hidden; }
 
     body {
       font-family: var(--font-body);
@@ -148,19 +144,28 @@
       text-transform: uppercase;
       font-weight: 300;
       opacity: 0.35;
+      margin-bottom: 0;
     }
 
     /*
-      The PNG has more whitespace below the swoosh than above the steam.
-      Top: -5vmin trims a little (steam sits close to tagline)
-      Bottom: -22vmin aggressively trims the excess below swoosh
+      Clip the PNG whitespace using overflow:hidden on the wrapper.
+      - wrapper height (46vmin) clips ~14vmin off the bottom (the swoosh whitespace)
+      - negative top margin on wrapper (-6vmin) clips the top whitespace above steam
+      This is precise and won't cause text overlap.
     */
+    .cup-wrap {
+      width: 60vmin;
+      height: 46vmin;
+      overflow: hidden;
+      margin: -6vmin auto 0;
+      flex-shrink: 0;
+    }
+
     .cup-wrap img {
       width: 60vmin;
       height: 60vmin;
       object-fit: contain;
       display: block;
-      margin: -5vmin auto -22vmin;
     }
 
     .body-text {
@@ -233,7 +238,6 @@
     @media (max-width: 500px) {
       .page { padding: 28px 24px 56px; }
       .contact-line { font-size: 10px; bottom: 16px; }
-      .cup-wrap img { margin: -5vmin auto -22vmin; }
     }
 
     @media (min-width: 640px) {
