@@ -104,7 +104,6 @@
     .contact-line a { color: inherit; text-decoration: none; }
     .contact-line a:hover { color: rgba(222,208,196,0.65); }
 
-    /* Full viewport, no scroll, everything centred */
     .page {
       position: relative;
       z-index: 2;
@@ -151,13 +150,17 @@
       opacity: 0.35;
     }
 
-    /* Cup: fills the glow, asymmetric margins balance spacing above/below */
+    /*
+      The PNG has more whitespace below the swoosh than above the steam.
+      Top: -5vmin trims a little (steam sits close to tagline)
+      Bottom: -22vmin aggressively trims the excess below swoosh
+    */
     .cup-wrap img {
       width: 60vmin;
       height: 60vmin;
       object-fit: contain;
       display: block;
-      margin: -5vmin auto -15vmin;
+      margin: -5vmin auto -22vmin;
     }
 
     .body-text {
@@ -230,6 +233,7 @@
     @media (max-width: 500px) {
       .page { padding: 28px 24px 56px; }
       .contact-line { font-size: 10px; bottom: 16px; }
+      .cup-wrap img { margin: -5vmin auto -22vmin; }
     }
 
     @media (min-width: 640px) {
