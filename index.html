@@ -86,7 +86,6 @@
       z-index: 1;
     }
 
-    /* Contact pinned to bottom */
     .contact-line {
       position: fixed;
       bottom: 28px;
@@ -106,7 +105,6 @@
 
     .contact-line a:hover { color: rgba(222,208,196,0.65); }
 
-    /* Main centred column */
     .page {
       position: relative;
       z-index: 2;
@@ -154,12 +152,13 @@
       margin-bottom: 0;
     }
 
+    /* Asymmetric margins: less cut from top (cup sits lower), more from bottom (swoosh pulls up) */
     .cup-wrap img {
       width: 60vmin;
       height: 60vmin;
       object-fit: contain;
       display: block;
-      margin: -10vmin auto;
+      margin: -5vmin auto -15vmin;
     }
 
     .divider-line {
@@ -236,13 +235,11 @@
       margin-top: 16px;
     }
 
-    /* Mobile */
     @media (max-width: 500px) {
       .page { padding: 44px 28px 72px; }
       .contact-line { font-size: 10px; bottom: 20px; }
     }
 
-    /* Tablet */
     @media (min-width: 640px) {
       .page { max-width: 580px; padding: 52px 48px 80px; }
       .logo { font-size: clamp(44px, 7vw, 56px); }
@@ -252,7 +249,6 @@
       .contact-line { font-size: 12px; bottom: 32px; }
     }
 
-    /* Desktop */
     @media (min-width: 1024px) {
       .page { max-width: 640px; padding: 52px 60px 80px; }
       .logo { font-size: clamp(46px, 5vw, 58px); }
