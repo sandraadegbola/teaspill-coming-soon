@@ -50,7 +50,6 @@
       pointer-events: none; z-index: 0;
     }
 
-    /* Ripple */
     @keyframes ripple1 {
       0%   { transform: translateX(-120%) skewX(-8deg); opacity: 0; }
       15%  { opacity: 1; }
@@ -93,9 +92,9 @@
       pointer-events: none; z-index: 2;
     }
 
-    /* Fixed footer */
+    /* Fixed footer — only on screens tall enough to not overlap content */
     .contact-line {
-      position: fixed; bottom: 24px; left: 50%;
+      position: fixed; bottom: 20px; left: 50%;
       transform: translateX(-50%);
       z-index: 10; font-size: 11px;
       color: rgba(222,208,196,0.4);
@@ -105,14 +104,21 @@
     .contact-line a { color: inherit; text-decoration: none; }
     .contact-line a:hover { color: rgba(222,208,196,0.65); }
 
-    /* Page layout — natural flow, padded away from fixed footer */
+    /* Page: 3-section flex column filling full viewport height */
     .page {
       position: relative; z-index: 3;
       width: 100%; max-width: 560px;
       margin: 0 auto;
+      min-height: 100vh;
       display: flex; flex-direction: column;
       align-items: center; text-align: center;
-      padding: 60px 32px 80px; /* bottom clears fixed footer */
+      padding: 56px 28px 100px;
+    }
+
+    /* TOP: logo + tagline — stays fixed at top */
+    .top-section {
+      display: flex; flex-direction: column;
+      align-items: center; width: 100%;
     }
 
     .eyebrow {
@@ -123,11 +129,11 @@
 
     .logo {
       font-family: var(--font-heading); font-style: italic;
-      font-weight: 500; font-size: clamp(38px, 7vw, 52px);
+      font-weight: 500; font-size: clamp(36px, 9vw, 52px);
       line-height: 1; margin-bottom: 12px; letter-spacing: -0.5px;
     }
 
-    .logo .tea { color: #DED0C4; }
+    .logo .tea  { color: #DED0C4; }
     .logo .spill { color: var(--rose); }
 
     .tagline {
@@ -136,18 +142,32 @@
       font-weight: 300; opacity: 0.35;
     }
 
-    /*
-      Cup: 55vmin wide (slightly smaller than before).
-      Top margin -8vmin: pulls cup closer to tagline above (reduces top gap).
-      Bottom margin -8vmin: leaves breathing room below swoosh.
-      Both sides equal so steam-to-tagline ≈ swoosh-to-text.
-    */
+    /* MIDDLE: cup — grows to fill remaining space, cup centred within it */
+    .cup-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 180px;
+    }
+
+    .cup-wrap {
+      /* trim internal PNG whitespace equally top and bottom */
+      margin: -6vmin 0;
+    }
+
     .cup-wrap img {
       width: 55vmin;
       height: 55vmin;
       object-fit: contain;
       display: block;
-      margin: -8vmin auto -8vmin;
+    }
+
+    /* BOTTOM: text + form — sits at the bottom naturally */
+    .bottom-section {
+      display: flex; flex-direction: column;
+      align-items: center; width: 100%;
     }
 
     .body-text {
@@ -158,35 +178,41 @@
 
     .body-text-italic {
       font-family: var(--font-heading); font-style: italic;
-      font-size: 15px; color: #FDF8F5;
+      font-size: 15px; color: var(--cream);
       opacity: 0.9; margin-bottom: 24px;
     }
 
+    /* Form: full width stacked on mobile */
     .form {
-      width: 100%; max-width: 320px;
-      display: flex; gap: 8px;
+      width: 100%;
+      max-width: 340px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .form input {
-      flex: 1;
+      width: 100%;
       background: rgba(253,248,245,0.07);
       border: 1px solid rgba(253,248,245,0.16);
-      border-radius: 4px; padding: 12px 14px;
-      font-size: 13px; color: var(--cream);
+      border-radius: 4px; padding: 13px 16px;
+      font-size: 14px; color: var(--cream);
       font-family: var(--font-body); outline: none;
       transition: border-color 0.2s;
+      -webkit-appearance: none;
     }
 
     .form input::placeholder { color: rgba(253,248,245,0.32); }
     .form input:focus { border-color: rgba(219,169,154,0.5); }
 
     .form button {
+      width: 100%;
       background: var(--rose); border: none;
-      border-radius: 4px; padding: 12px 18px;
-      font-size: 11.5px; font-weight: 600;
+      border-radius: 4px; padding: 13px 18px;
+      font-size: 12px; font-weight: 600;
       color: var(--primary); font-family: var(--font-body);
-      cursor: pointer; white-space: nowrap;
-      letter-spacing: 0.5px; transition: background 0.2s;
+      cursor: pointer; letter-spacing: 0.5px;
+      transition: background 0.2s;
     }
 
     .form button:hover { background: #c99585; }
@@ -196,27 +222,32 @@
       color: var(--rose); letter-spacing: 0.5px; margin-top: 14px;
     }
 
-    @media (max-width: 500px) {
-      .page { padding: 48px 24px 72px; }
-      .contact-line { font-size: 10px; bottom: 16px; }
-      .cup-wrap img { width: 70vmin; height: 70vmin; margin: -10vmin auto -10vmin; }
+    /* 540px+: form side by side */
+    @media (min-width: 540px) {
+      .form { flex-direction: row; max-width: 400px; }
+      .form input { font-size: 13px; padding: 12px 14px; }
+      .form button { width: auto; white-space: nowrap; }
     }
 
     @media (min-width: 640px) {
-      .page { max-width: 600px; padding: 64px 48px 80px; }
+      .page { max-width: 600px; padding: 64px 48px 100px; }
       .logo { font-size: clamp(42px, 6vw, 54px); }
-      .form { max-width: 380px; }
+      .cup-wrap img { width: 50vmin; height: 50vmin; }
+      .cup-wrap { margin: -5vmin 0; }
+      .form { max-width: 420px; }
       .body-text { max-width: 290px; font-size: 13.5px; }
       .body-text-italic { font-size: 16px; }
       .contact-line { font-size: 12px; bottom: 28px; }
     }
 
     @media (min-width: 1024px) {
-      .page { max-width: 660px; padding: 72px 60px 80px; }
+      .page { max-width: 660px; padding: 72px 60px 100px; }
       .logo { font-size: clamp(44px, 4.5vw, 56px); }
-      .form { max-width: 420px; }
+      .cup-wrap img { width: 44vmin; height: 44vmin; }
+      .cup-wrap { margin: -4vmin 0; }
+      .form { max-width: 440px; }
       .form input { padding: 13px 16px; font-size: 13.5px; }
-      .form button { padding: 13px 20px; font-size: 12px; }
+      .form button { padding: 13px 22px; font-size: 12px; }
       .body-text { max-width: 300px; font-size: 14px; }
       .body-text-italic { font-size: 17px; margin-bottom: 28px; }
       .contact-line { font-size: 12px; bottom: 28px; }
@@ -238,24 +269,35 @@
   </p>
 
   <div class="page">
-    <p class="eyebrow">Coming soon</p>
-    <div class="logo">
-      <span class="tea">Tea</span><span class="spill">spill</span>
+
+    <!-- TOP: stays at top -->
+    <div class="top-section">
+      <p class="eyebrow">Coming soon</p>
+      <div class="logo">
+        <span class="tea">Tea</span><span class="spill">spill</span>
+      </div>
+      <p class="tagline">Black beauty, honestly reviewed</p>
     </div>
-    <p class="tagline">Black beauty, honestly reviewed</p>
 
-    <div class="cup-wrap">
-      <img src="cup.png" alt="Teaspill tea cup" />
+    <!-- MIDDLE: cup centred in remaining space -->
+    <div class="cup-section">
+      <div class="cup-wrap">
+        <img src="cup.png" alt="Teaspill tea cup" />
+      </div>
     </div>
 
-    <p class="body-text">The UK's first dedicated reviews platform for Black hair &amp; beauty.</p>
-    <p class="body-text-italic">No more bad chair days.</p>
+    <!-- BOTTOM: text and form pushed to bottom -->
+    <div class="bottom-section">
+      <p class="body-text">The UK's first dedicated reviews platform for Black hair &amp; beauty.</p>
+      <p class="body-text-italic">No more bad chair days.</p>
 
-    <form class="form" id="emailForm" onsubmit="handleSubmit(event)">
-      <input type="email" id="emailInput" placeholder="Your email address" required />
-      <button type="submit">Notify me</button>
-    </form>
-    <p class="success-msg" id="successMsg">You're on the list — we'll be in touch ✦</p>
+      <form class="form" id="emailForm" onsubmit="handleSubmit(event)">
+        <input type="email" id="emailInput" placeholder="Your email address" required />
+        <button type="submit">Notify me</button>
+      </form>
+      <p class="success-msg" id="successMsg">You're on the list — we'll be in touch ✦</p>
+    </div>
+
   </div>
 
   <script>
